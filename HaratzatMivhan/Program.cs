@@ -36,21 +36,36 @@ namespace TshovotMivhan
             int[] result = CalcHefresh(Packages);
             PrintArray(result);
 
-            //שאלה 2
-            //יצירה של נקודה וישר
-            //בדיקות גם לפונקציה שהוספתי
+
+            // יצירה של נקודה וישר לפונקציה שלי ולשאלה 2 מהמבחן
             Point1 p1 = new Point1(28, 8);
-            Line l1 = new Line(4, 50);//מכיוון שהוואי של הנקודה קטן מהוואי של הישר הנקודה תהיה מתחתיו
+            Line l1 = new Line(4, 15);
+            Point1 p2 = new Point1(5, 20);
+            Line l2 = new Line(2, 5);
+            Point1 p3 = new Point1(-16, 4);
+            Line l3 = new Line(0,4);
+
+            //שאלה 2 מהמבחן
             Line mak = Makbil(l1, p1);
             Console.WriteLine(mak);
+            Line mak1 = Makbil(l2, p2);
+            Console.WriteLine(mak1);
+            Line mak3 = Makbil(l3, p3);
+            Console.WriteLine(mak3);
+
+            //הדפסות ובדיקות לפונקציה שלי
+            IsPointBelowOrAboveLine(l1, p1);//מכיוון שהוואי של הנקודה קטן מהוואי של הישר הנקודה תהיה מתחתיו
+            IsPointBelowOrAboveLine(l2, p2);//מכיוון שהוואי של הנקודה גדול מהוואי של הישר הנקודה תהיה מעליו
+            IsPointBelowOrAboveLine(l3, p3);//מכיוון שהוואי של הנקודה שווה לוואי של הישר הנקודה תהיה בדיוק עליו
+
+
 
             // יצירת מערך של החורגים בכדי להשתמש בו בפונקציה מה שבע
             ComPac[] hargoPackages = CalcArrHorgim(Packages);
             bool[] maSheva = GetMaShevaArr(hargoPackages);
             PrintArray(maSheva);
-            string result3 = IsPointBelowOrAboveLine(l1, p1);
-            Console.WriteLine("the point " +p1 + " is " + result3 + l1);
-
+         
+            
 
         }
 
@@ -90,11 +105,11 @@ namespace TshovotMivhan
         }
 
 
-        public static Line Makbil(Line l1, Point1 p1)
+        public static Line Makbil(Line l, Point1 p)
         {
             //פונקציה לחישוב ישר מקביל לקו המתקבל ועובר בנקודה המתקבלת
-            double m = l1.GetM();
-            double b = p1.GetY() - p1.GetX() * m;
+            double m = l.GetM();
+            double b = p.GetY() - p.GetX() * m;
             Line newLine = new Line(m, b);
             return newLine;
         }
@@ -145,22 +160,23 @@ namespace TshovotMivhan
             return maSheve;
         }
 
-        public static string IsPointBelowOrAboveLine(Line l, Point1 p)
+        public static void IsPointBelowOrAboveLine(Line l, Point1 p)
         {
             //הפונקציה מקבלת ישר ונקודה ומחזירה איפה נמצאת הנקודה ביחס לישר
             double lineY = l.GetM() * p.GetX() + l.GetB();
+            
             if (lineY > p.GetY())
             {
-                return "below the line";
+                 Console.WriteLine("the point " + p + " is below the line :" + " " + l) ;
             }
             if (lineY < p.GetY())
             {
-                return "above the line";
+                Console.WriteLine("the point " + p + " is  above the line: " + " " + l);
             }
-            else
-            {
-                return "on line";
+            if (lineY == p.GetY())
 
+            {
+                Console.WriteLine("the point " + p + " is on the line: " + " " + l);
             }
         }
 

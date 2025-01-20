@@ -30,8 +30,12 @@ namespace TshovotMivhan
         }
         public override string ToString()
         {
-            return "y=" + this.m + "x" + "+" + this.b;
+            if (b > 0)
+            {
+                return "y=" + this.m + "x" + "+" + this.b;
 
+            }
+            return "y=" + this.m + "x" + this.b;
         }
     }
 }
